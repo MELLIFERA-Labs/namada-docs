@@ -1,8 +1,11 @@
 name: Publish namada-community
 
-on: [push]
-paths:
-  - "packages/community/**"
+on: 
+  push:
+    paths:
+      - "packages/community/**"
+      
+  workflow_dispatch:
 
 jobs:
   publish:

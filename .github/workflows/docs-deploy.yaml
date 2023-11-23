@@ -1,8 +1,11 @@
 name: Publish namada-docs
 
-on: [push]
-paths:
-  - "packages/docs/**"
+on: 
+  push:
+    paths:
+      - "packages/docs/**"
+
+  workflow_dispatch:
 
 jobs:
   publish:
