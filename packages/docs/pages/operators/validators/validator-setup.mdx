@@ -18,7 +18,7 @@ The method for setting up a genesis validator is described under the [pre-genesi
 
 ## Post-genesis validators
 
-Post-genesis validators are validators that become initialised after the genesis block. This is the most common way of becoming a validator, and is the method described in this section.
+Post-genesis validators are validators that become initialized after the genesis block. This is the most common way of becoming a validator, and is the method described in this section.
 
 <Callout type="info" emoji="🤡">
 Note the use  of the placeholder `aliace` for the alias parameter. This is a completely configurable parameter, and should just refer to the alias of the key/address generated.
@@ -30,7 +30,7 @@ The user must first generate a key pair for their validator account.
 
 ```bash copy
 KEY_ALIAS="aliace"
-namada wallet key gen --alias $KEY_ALIAS
+namada wallet gen --alias $KEY_ALIAS
 ```
 
 Now choose a name for your validator:
@@ -86,6 +86,8 @@ The local ledger node will also be setup to run this validator, you just have to
 
 ```shell copy
 namadan ledger run
+# or for more verbose output:
+# NAMADA_LOG=info CMT_LOG_LEVEL=p2p:none,pex:error NAMADA_CMT_STDOUT=true namadan ledger run
 ```
 
 The ledger will then use the validator consensus key to sign blocks, should your validator account acquire enough voting power to be included in the active validator set. The size of the active validator set is limited to `128` (the limit is set by the PoS `max_validator_slots` parameter).

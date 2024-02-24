@@ -1,6 +1,6 @@
 import { Callout } from 'nextra-theme-docs'
 
-{/* TODO: Maket this section more clear. At the moment I'm not sure what optmisation is what in the "possible optimisations" */}
+{/* TODO: Maket this section more clear. At the moment I'm not sure what optimisation is what in the "possible optimisations" */}
 # Possible optimizations
 
 In this section we describe two alternative solutions that come with some optimizations.
@@ -69,7 +69,7 @@ these conditions doesn't hold the VP will discard the transactions and prevent
 the changes from being applied to the storage.
 
 In the specific case of a shielded transfer, since MASP already comes with
-replay protection as part of the Zcash design (see the [MASP specs](../masp.mdx)
+replay protection as part of the Zcash design (see the [MASP specs](../../modules/masp.mdx)
 and [Zcash protocol specs](https://zips.z.cash/protocol/protocol.pdf)), the
 counter in `SignedTxData` is not required and therefore should be optional.
 
@@ -387,7 +387,7 @@ the following:
 
 ```rust
 pub struct WrapperTx {
-  /// The fee to be payed for including the tx
+  /// The fee to be paid for including the tx
   pub fee: Fee,
   /// Used to determine an implicit account of the fee payer
   pub pk: common::PublicKey,
@@ -486,16 +486,16 @@ validate it. These will involve:
 
 - Valid signature
 - `GasLimit` is below the block gas limit (see the
-  [fee specs](../economics/fee-system.mdx) for more details)
+  [fee specs](../fee-system.mdx) for more details)
 - `Fees` are paid with an accepted token and match the minimum amount required
-  (see the [fee specs](../economics/fee-system.mdx) for more details)
+  (see the [fee specs](../fee-system.mdx) for more details)
 - Valid chainId
 - Valid transaction counter
 - Valid expiration
 
 These checks can all be done before executing the transactions themselves. If
 any of these fails, the transaction should be considered invalid and the action
-to take will be one of the followings:
+to take will be one of the following:
 
 1. If the checks fail on the signature, chainId, expiration or transaction
    counter, then this transaction will be forever invalid, regardless of the
