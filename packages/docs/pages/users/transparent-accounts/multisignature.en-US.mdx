@@ -16,22 +16,16 @@ Before creating an account, a user must generate at least one cryptographic `key
 
 The following method will generate such a key:
 ```shell
-namadaw key gen \
+namadaw gen \
 --alias my-key1
 ```
 A second key can be generated as well (which will be useful for multisigs):
 ```shell
-namadaw key gen \
+namadaw gen \
 --alias my-key2
 ```
 
-An implicit address can also be generated:
-```shell
-namadaw address gen \
---alias my-address
-```
-
-Accounts on Namada are initialised through the following method:
+Accounts on Namada are initialized through the following method:
 
 **Non-multisig account (single signer)**
 ```shell
@@ -113,8 +107,7 @@ The final step is to submit the transaction. This can be done through the follow
 ```shell
 namadac tx \
 --tx-path "tx_dumps/a45ef98a817290d6fc0efbd480bf66647ea8061aee1628ce09b4af4f4eeed1c2.tx" \
---signatures $SIGNATURE_ONE \
---signatures $SIGNATURE_TWO \
+--signatures $SIGNATURE_ONE $SIGNATURE_TWO \
 --owner my-multisig-alias \
 --gas-payer my-key1
 ```
@@ -157,4 +150,4 @@ The public-keys provided to the argument `--public-keys` will become the new sig
 
 Skip all the boring reading and watch a video tutorial instead:
 
-<iframe src="https://player.vimeo.com/video/873749851?h=ee68c142e2&title=0&byline=0&portrait=0" width="640" height="416" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/873749851?h=ee68c142e2&title=0&byline=0&portrait=0" width="640" height="416" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>

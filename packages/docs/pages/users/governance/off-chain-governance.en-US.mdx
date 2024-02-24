@@ -6,15 +6,43 @@ If for any reason issuing an on-chain proposal is not adequate to your needs, yo
 
 ## Create proposal
 
-Create the same json file as in the on-chain proposal and use the following command:
+### The proposal file
+
+For offline proposals, the structure of the `proposal.json` file is as follows:
+
+```json
+"content": {
+                "title": "<Title>",
+                "authors": "<email>",
+                "discussions-to": "<forum-link>",
+                "created": "<Timestamp in format YYYY-MM-DDTHH:MM:SSZ>",
+                "license": "<Licences>",
+                "abstract": "<Abstract>",
+                "motivation": "<Motivation>",
+                "details": "<Details>",
+                "requires": "<preceding-proposal-id-that-must-pass>",
+            },
+"author": "<author-address>",
+"tally_epoch": 1337,
+```
+
+<Callout type="info">
+The `tally_epoch` is the block height at which the tally was computed. This is any integer before the current epoch. Since the tallying should occur before it is submitted.
+</Callout>
 
 ```shell copy
 namada client init-proposal \
     --data-path proposal.json \
+    --signing-keys your-signing-keys-for-author \
     --offline
 ```
 
 This command will create a `proposal` file same directory where the command was launched.
+
+<Callout type="info">
+If you would like the proposal to be created in a different directory, you can use the `--output-folder-path` flag to specify the directory. The directory must already exist, however.
+It is also essential that you provide the `--signing-keys` argument to sign the proposal. As of `v0.31.2`, the `--signing-keys` is optional but it is not possible to sign the proposal after it has been created.
+</Callout>
 
 ## Vote on proposal
 
@@ -24,7 +52,7 @@ To vote on an offline proposal use the following command:
 namada client vote-proposal --data-path proposal \
     --vote yay \
     --signing-keys your-signing-keys-for-voter \
-    --voter your-established-account \
+    --address your-established-account \
     --offline
 ```
 
