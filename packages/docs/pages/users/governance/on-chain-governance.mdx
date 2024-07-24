@@ -19,22 +19,22 @@ Now, we need to create a json file `proposal.json` holding the content of our pr
 ```json
 {
     "proposal": {
-    "id": "Arbitrary",
-    "content": {
-        "title": "Text",
-        "authors": "Text",
-        "discussions-to": "URL",
-        "created": "YYYY--DDTHH:MM:SSZ",
-        "license": "<insert-license>",
-        "abstract": "Text",
-        "motivation": "Text",
-        "details": "Text",
-        "requires": "Number"
-    },
-    "author": "author-address",
-    "voting_start_epoch": 420,
-    "voting_end_epoch": 426,
-    "grace_epoch": 432,
+        "id": "Arbitrary",
+        "content": {
+            "title": "Text",
+            "authors": "Text",
+            "discussions-to": "URL",
+            "created": "YYYY--DDTHH:MM:SSZ",
+            "license": "<insert-license>",
+            "abstract": "Text",
+            "motivation": "Text",
+            "details": "Text",
+            "requires": "Number"
+        },
+        "author": "author-address",
+        "voting_start_epoch": 4,
+        "voting_end_epoch": 6,
+        "grace_epoch": 8
     },
     "data": "TODO-ADD-DATA-IF-NEEDED"
 }
@@ -47,7 +47,7 @@ A correct Steward proposal example is shown below:
         "id": 1,
 		"content": {
 			"title": "One Small Step for Namada, One Giant Leap for Memekind",
-			"authors": "bengt@heliax.dev",
+			"authors": "alice@heliax.dev",
 			"discussions-to": "forum.namada.net/t/namada-proposal/1",
 			"created": "2069-04-20T00:04:44Z",
 			"license": "MIT",
@@ -59,7 +59,7 @@ A correct Steward proposal example is shown below:
 		"author": "tnam1qql6qme020vw7pfw4ruavrwxujf9lf8z75v90c8q",
 		"voting_start_epoch": 21,
 		"voting_end_epoch": 24,
-		"grace_epoch": 27,
+		"grace_epoch": 27
 	},
     "data":
         {
@@ -89,7 +89,7 @@ The `data` field and its structure is dependent on the type of proposal being su
 <Callout type="info">
 The data field for default proposals is optional. This is in line with the nature of default proposals. 
 If the proposals have code attached to them in order to change governance parameters, then this code 
-will be represented as a wasm file and byte encoded vector will be tehe value of the data field.
+will be represented as a wasm file and byte encoded vector will be the value of the data field.
 </Callout>
 
 <Callout type="info" emoji="">
@@ -173,17 +173,6 @@ For a pgf proposal that is to be executed on an IBC chain, the "Internal" data s
     }
 ```
 
-### ETH Bridge Proposal
-
-```json
-"data" : "<hex-encoded-bytes-of-what-will-be-signed-by-validators>"
-```
-
-<Callout type="warning">
-**Note**:
-The encoding will be submitted as a string
-</Callout>
-
 
 ## Submitting the proposal
 As soon as your `proposal.json` file is ready, you can submit the proposal with (make sure to be in the same directory as the `proposal.json` file):
@@ -225,7 +214,7 @@ Only delegators and delegates can vote on proposals. Assuming you fall into one 
 namada client vote-proposal \
     --proposal-id 0 \
     --vote yay \
-    --address <your-address>
+    --address $YOUR_ADDRESS
 ```
 
 <Callout type="info">

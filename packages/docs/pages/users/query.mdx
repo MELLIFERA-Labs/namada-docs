@@ -1,0 +1,53 @@
+# Querying Overview
+
+Querying a Namada chain is done using the client `namadac`.  
+
+This section details several common queries; see all available commands with `namadac --help`.
+
+#### query-account
+
+```txt
+namadac query-account --owner $OWNER_ADDRESS
+```
+
+Returns the `Threshold` and `Public` key(s) of an established account.
+
+#### query-pgf
+
+```
+namadac query-pgf
+```
+
+Returns the list of PGF Stewards, their reward distribution, and active PGF streaming payments.
+
+#### query-proposal
+
+```
+namadac query-proposal --proposal-id $ID
+```
+
+Returns info on a given proposal, including its type, author, content, StartEpoch, EndEpoch, GraceEpoch, and Status.
+
+#### query-proposal-result
+
+```
+namadac query-proposal-result --proposal-id $ID
+```
+
+Returns the outcome of a given proposal, including whether it's Passed/Rejected, the total number of votes for yay/nay/abstain, and the threshold (fraction) of the total voting power needed to tally.
+
+#### query-proposal-votes
+
+```
+namadac query-proposal-votes --proposal-id $ID
+```
+
+Returns the results of all wallets that have voted `yay` or `nay` on the proposal
+
+```
+namadac query-proposal-votes --proposal-id $ID --voter $VOTER_ADDRESS
+```
+
+Returns the result of a specific wallet that has voted on a specific proposal
+
+{/* TODO: add more queries*/}

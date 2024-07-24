@@ -1,0 +1,61 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Shielded IBC
+
+You can send assets to another IBC compliant chain, such as a Cosmos SDK chain or another Namada chain, using the
+`ibc-transfer` command in `namadac`.
+
+This section covers sending assets to and from a shielded ( `znam` ) address.
+
+## Prerequisites
+
+- An active IBC connection has been created and maintained between the two chains by operators running relayer 
+software such as [Hermes](https://github.com/heliaxdev/hermes). 
+- You will need to know the corresponding channel id
+
+## IBC transfer to a shielded address
+<Callout>
+Previous versions of Namada required a two-step process to make IBC transfers to a shielded address: first a MASP proof was generated using the 
+`ibc-gen-shielded` command, and this proof was included in the `memo` field of the transfer.  
+
+It is no longer necessary to manually generate the MASP proof, and the `ibc-gen-shielded` command has been removed.
+</Callout>
+
+IBC transfers to a shielded address work similarly to those for a [tranparent address](./transparent-ibc.mdx), 
+the only difference being that we provide for `$RECV_ADDRESS` a shielded (`znam`) address instead of a transparent (`tnam`) one:
+
+```bash copy
+namadac ibc-transfer \
+  --source $SOURCE_ADDRESS \
+  --receiver $RECEIVER_PAYMENT_ADDRESS \
+  --token $TOKEN \
+  --amount $AMOUNT \
+  --channel-id $CHANNEL_ID
+```
+  
+Or, when sending from a Cosmos Sdk chain:
+
+```bash copy
+gaiad tx ibc-transfer transfer \
+  $CHANNEL_ID \
+  $RECEIVER_PAYMENT_ADDRESS \
+  ${AMOUNT}${IBC_TOKEN_ADDRESS} \
+  --from $COSMOS_ALIAS \
+  --node $COSMOS_RPC_ENDPOINT \
+  --fees 5000uatom
+```
+
+## IBC transfer from a shielded address
+You can also send IBC transfers from a shielded address, by providing the associated spending key as the source:
+```bash copy
+namadac ibc-transfer \
+  --source $SOURCE_SPEND_KEY \
+  --receiver $RECV_ADDRESS \
+  --token $TOKEN \
+  --amount $AMOUNT \
+  --channel-id $CHANNEL_ID \
+  --gas-payer $IMPLICIT_ADDRESS
+```
+<Callout>
+When sending any transaction from a shielded address, you must also provide an implicit address which you control with enough funds to cover gas costs.
+</Callout>
